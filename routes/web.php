@@ -27,8 +27,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'backoffice'], function () {
     //configuration
     Route::get('configuration', 'ConfigurationController@index')->name('configuration');
     Route::post('configuration', 'ConfigurationController@store')->name('configuration.store');
-    Route::post('projects/media', 'ConfigurationController@storeMedia')
-  ->name('configuration.storeMedia');
+    Route::post('temporal-files', 'TemporalFileController@storeMedia')->name('temporalFiles.storeMedia');
 });
 
 Auth::routes();

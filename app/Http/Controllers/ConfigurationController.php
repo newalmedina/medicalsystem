@@ -48,6 +48,11 @@ class ConfigurationController extends Controller
         setting()->set('phone_number', $request->phone_number);
         setting()->set('direction', $request->direction);
         if ($request->document != "") {
+            if(setting('logo_photo')!=null){
+                if(file_exists(setting('logo_photo'))){
+                    unlink(setting('logo_photo'));
+                }
+            }
             foreach ($request->document as $file) {
                 $newPhoto = 'config_photo/' .$file;
                 if (!copy("temporal_files/".$file, $newPhoto)) {
@@ -61,22 +66,5 @@ class ConfigurationController extends Controller
         setting()->save();
         return 1;
     }
-    public function storeMedia(Request $request)
-    {
-        $image = $request->file('file');
-
-        // $filename = round(microtime(true)) . $image->getClientOriginalName();
-        $extension = $image->getClientOriginalName();
-        $filename = round(microtime(true)) . '.' . $extension;
-        $image_course = Image::make($image->getRealPath());
-        $image_course->save(public_path('temporal_files/' . $filename));
-        $file_name = "temporal_files/" . $filename;
-        Temporal_File::create([
-            "file_directory" => $filename,
-            "user_id" => Auth::user()->id]);
-        return response()->json([
-            'name' => $filename,
-            'original_name' => $filename,
-        ]);
-    }
+  
 }

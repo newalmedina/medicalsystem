@@ -91,6 +91,7 @@
 @endsection
 @push('js')
 <script>
+  dropzone(1);
    $('#form_configuration').submit(function(e) {
         e.preventDefault(); 
    
@@ -114,12 +115,8 @@
               $("#direction_error").text("");
             },
             success: function(data) {
-              alertMessage('success',' Registro guardado correctamente');
-              $("#document-dropzone").remove();
-              $("#dropzone_container").html('<div class="needsclick dropzone" id="document-dropzone"></div>');
-              $('form').find('input[name="document[]"]').remove();
-              dropzone();
-              
+              alertMessage('success',' Registro guardado correctamente');               
+              clearDropzone();
             },
              error: function (response) {
               if (response.status == 422) { // when status code is 422, it's a validation issue
@@ -140,47 +137,7 @@
         });
 
     });
-    dropzone();
-  function dropzone(){
-    var uploadedDocumentMap = {}
-  Dropzone.options.documentDropzone = {
-    url: '{{ route('configuration.storeMedia') }}',
-    maxFilesize: 1, // MB
-    maxFiles: 2,
-    addRemoveLinks: true,
-    headers: {
-      'X-CSRF-TOKEN': "{{ csrf_token() }}"
-    },
-    success: function (file, response) {
-      $('form').append('<input type="text" name="document[]" value="' + response.name + '">')
-      uploadedDocumentMap[file.name] = response.name
-    },
-    removedfile: function (file) {
-      file.previewElement.remove()
-      var name = ''
-      if (typeof file.file_name !== 'undefined') {
-        name = file.file_name
-      } else {
-        name = uploadedDocumentMap[file.name]
-      }
-      $('form').find('input[name="document[]"][value="' + name + '"]').remove()
-    },
-    init: function () {
-      @if(isset($project) && $project->document)
-        var files =
-          {!! json_encode($project->document) !!}
-        for (var i in files) {
-          var file = files[i]
-          this.options.addedfile.call(this, file)
-          file.previewElement.classList.add('dz-complete')
-          $('form').append('<input type="text" name="document[]" value="' + file.file_name + '">')
-        }
-      @endif
-    }
-  }
-  }
- 
-  
+      
 </script>
     
 @endpush
