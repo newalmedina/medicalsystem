@@ -9,6 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
     @include('layout.backoffice.links')
     <style>
+        .dropzone{
+            border: 3px dashed #29CBE1 !important;
+            border-radius: 5px !important;
+            background: white !important;
+           }
    </style>
     @stack('css')
 </head>

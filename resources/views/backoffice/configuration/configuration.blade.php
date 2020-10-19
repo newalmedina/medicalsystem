@@ -35,7 +35,7 @@
         
         <div class="card">
             <div class="card-body" id="card-refresh-content">
-              <form action="" method="POST" enctype="multipart/form-data" id="form_configuration">
+              <form class="form-row" action="" method="POST" enctype="multipart/form-data" id="form_configuration">
                            
                 <div class="form-group  col-md-6">
                   <label for="hospital_name">@lang('base.Nombre centro medico')</label>
@@ -64,16 +64,18 @@
                   <div id="direction_error" class="text-danger font-italic"></div>
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group col-12 ">
                   <label for="document">Documents</label>
-                  <div id="dropzone_container">
+                  <div class="" id="dropzone_container">
                     <div class="needsclick dropzone" id="document-dropzone">          
                     </div>
-                  </div>
+                  </div>                 
+                </div>
+                <div class="form-group  col-12 text-center"  id="resource">
                  
-              </div>
-              <div>
-                  <input class="btn btn-danger" type="submit">
+                </div>
+                <div class="form-group  col-md-12">
+                  <input class="btn btn-success" type="submit">
               </div>
             </form>
            
@@ -91,6 +93,10 @@
 @endsection
 @push('js')
 <script>
+  $( document ).ready(function() {
+    getConfigResource();
+   
+  });
   dropzone(1);
    $('#form_configuration').submit(function(e) {
         e.preventDefault(); 
@@ -115,7 +121,8 @@
               $("#direction_error").text("");
             },
             success: function(data) {
-              alertMessage('success',' Registro guardado correctamente');               
+              alertMessage('success',' Operacion realizada correctamente'); 
+              getConfigResource();              
               clearDropzone();
             },
              error: function (response) {
@@ -137,7 +144,31 @@
         });
 
     });
+    $(document).on('click', '#delete_resource', function (e) {
+            e.preventDefault();
+          
+            Swal.fire({
+                title: "{{ __('base.¿Estás segur@?') }}",
+                text: "{{ __('base.Esta acción no se puede deshacer') }}",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "{{ __('base.Sí, borrar') }}",
+                cancelButtonText: "{{ __('base.Cancelar') }}",
+            }).then(function (result) {
+                if (result.value) {
+                    $.get('{{ url('backoffice/configuration-delete-resorce/') }}', function (data) {
+                      getConfigResource();
+                    });
+                    alertMessage('success',' Operacion realizada correctamente');                
+                }
+            });
+        });
       
+    function getConfigResource(){
+      $.get('{{ route('configuration.getConfigResource') }}', function (data) {
+          $("#resource").html(data);
+      });
+    }
 </script>
     
 @endpush

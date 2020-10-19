@@ -66,5 +66,16 @@ class ConfigurationController extends Controller
         setting()->save();
         return 1;
     }
+    public function deleteResource(){
+        if(file_exists(setting('logo_photo'))){
+            unlink(setting('logo_photo'));
+        }
+         setting()->forget('logo_photo');
+         return  setting()->save();
+    }
+    public function getConfigResource(){
+       $setting = setting('logo_photo');
+        return view("backoffice.configuration.ajax_get_config_resource",compact("setting"));
+    }
   
 }
