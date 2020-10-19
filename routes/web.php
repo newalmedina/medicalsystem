@@ -36,11 +36,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/prueba', function () {
-    setting()->set('foo', 'my vadsadslue');
-    setting()->set('foo2', 'my vadsadslue');
-    setting()->set('foo1', 'my vadsadslue');
-    setting()->set('foo3', 'my vadsadslue');
-    setting()->save();
-
-    return 1;
+    return Hash::make("secret");
 });
