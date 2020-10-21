@@ -22,6 +22,7 @@ Route::get('/', function () {
 
 //BACKOFFICE ROUTES
 Route::group(['middleware' => ['auth'], 'prefix' => 'backoffice'], function () {
+    Route::get('/logoutUser', 'UserController@logout')->name("logoutUser");
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
     //configuration

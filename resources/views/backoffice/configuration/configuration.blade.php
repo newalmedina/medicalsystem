@@ -1,18 +1,18 @@
 @php
     $props = [
-        'titulo' => __('base.Configuracion')
+        'titulo' => "Configuracion"
     ];
 @endphp
 @extends('layout.backoffice.app')
 
 @section('content')
- 
- 
+
+
 
 <div class="content-wrapper p-5">
     <!-- Content Header (Page header) -->
     <div class="content-header">
-      
+
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
@@ -32,16 +32,16 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        
+
         <div class="card">
             <div class="card-body" id="card-refresh-content">
               <form class="form-row" action="" method="POST" enctype="multipart/form-data" id="form_configuration">
-                           
+
                 <div class="form-group  col-md-6">
                   <label for="hospital_name">@lang('base.Nombre centro medico')</label>
-                  <input type="text" class="form-control" placeholder="" name="hospital_name" value="{{ $setting['hospital_name']}}">                  
+                  <input type="text" class="form-control" placeholder="" name="hospital_name" value="{{ $setting['hospital_name']}}">
                   <div id="hospital_name_error" class="text-danger font-italic"></div>
-                
+
                 </div>
                 <div class="form-group  col-md-6">
                   <label for="schedule">@lang('base.Horario de atencion')</label>
@@ -60,32 +60,32 @@
                 </div>
                 <div class="form-group  col-md-12">
                   <label for="phone_number">@lang('base.Direccion')</label>
-                  <textarea class="form-control" name="direction" id="" cols="30" rows="3">{{ $setting['direction']}}</textarea>  
+                  <textarea class="form-control" name="direction" id="" cols="30" rows="3">{{ $setting['direction']}}</textarea>
                   <div id="direction_error" class="text-danger font-italic"></div>
                 </div>
-                
+
                 <div class="form-group col-12 ">
                   <label for="document">Documents</label>
                   <div class="" id="dropzone_container">
-                    <div class="needsclick dropzone" id="document-dropzone">          
+                    <div class="needsclick dropzone" id="document-dropzone">
                     </div>
-                  </div>                 
+                  </div>
                 </div>
                 <div class="form-group  col-12 text-center"  id="resource">
-                 
+
                 </div>
                 <div class="form-group  col-md-12">
                   <input class="btn btn-success" type="submit">
               </div>
             </form>
-           
 
-           
+
+
             </div>
-            
+
         </div>
 
-      
+
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
@@ -95,15 +95,15 @@
 <script>
   $( document ).ready(function() {
     getConfigResource();
-   
+
   });
   dropzone(1);
    $('#form_configuration').submit(function(e) {
-        e.preventDefault(); 
-   
+        e.preventDefault();
+
         $('#phone_number').val();
         var formData = new FormData(this);
-        
+
        $.ajax({
             type: "post",
             url: '{{ route('configuration.store') }}',
@@ -113,16 +113,17 @@
             contentType: false,
             processData: false,
             beforeSend: function() {
-              $.blockUI({ message: '<h2 style="color:blue;" ><img width="120" src="{{asset("placeholders/loading.gif")}}" /> Un momento por favor!</h2>' });
+              loading();
               $("#hospital_name_error").text("");
               $("#schedule_error").text("");
               $("#email_error").text("");
               $("#phone_number_error").text("");
               $("#direction_error").text("");
+
             },
             success: function(data) {
-              alertMessage('success',' Operacion realizada correctamente'); 
-              getConfigResource();              
+              alertMessage('success',' Operacion realizada correctamente');
+              getConfigResource();
               clearDropzone();
             },
              error: function (response) {
@@ -138,15 +139,15 @@
               }
               alertMessage('error',' No se ha podido procesar la operacion contacte con el programador');
             },
-            complete: function() {               
-              $.unblockUI(); 
+            complete: function() {
+
             }
         });
 
     });
     $(document).on('click', '#delete_resource', function (e) {
             e.preventDefault();
-          
+
             Swal.fire({
                 title: "{{ __('base.¿Estás segur@?') }}",
                 text: "{{ __('base.Esta acción no se puede deshacer') }}",
@@ -159,16 +160,17 @@
                     $.get('{{ url('backoffice/configuration-delete-resorce/') }}', function (data) {
                       getConfigResource();
                     });
-                    alertMessage('success',' Operacion realizada correctamente');                
+                    alertMessage('success',' Operacion realizada correctamente');
                 }
             });
         });
-      
+
     function getConfigResource(){
       $.get('{{ route('configuration.getConfigResource') }}', function (data) {
           $("#resource").html(data);
       });
     }
 </script>
-    
+
 @endpush
+

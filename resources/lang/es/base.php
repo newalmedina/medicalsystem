@@ -4,7 +4,7 @@ return [
     'Dashboard' => 'Dashboard',
     'Inicio' => 'Inicio',
 
-    //Configuration  backoffice module 
+    //Configuration  backoffice module
     'Configuracion' => 'Configuración',
     'Centro medico' => 'Centro médico',
     'Mi perfil' => 'Mi perfil',
@@ -23,9 +23,9 @@ return [
     'Esta acción no se puede deshacer' => 'Esta acción no se puede deshacer',
     'Sí, borrar' => 'Sí, borrar',
     'Cancelar' => 'Cancelar',
-    '' => '',
-    '' => '',
-    '' => '',
+    'Cerrar session' => 'Cerrar sessión',
+    'Un momento por favor!' => 'Un momento por favor!',
+    'Procesando peticion' => 'Procesando petición',
     '' => '',
     '' => '',
     '' => '',

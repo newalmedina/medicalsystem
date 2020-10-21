@@ -19,11 +19,13 @@
 </head>
 <body class="blockpage hold-transition sidebar-mini layout-fixed">
     @stack('modals')
-   
+
     {{--DELEATING TEMPORAL FILES BY USER--}}
 
     <div class="wrapper">
-        {{U::deleteTemporalFile()}}
+        <div hidden>
+            {{U::deleteTemporalFile()}}
+        </div>
         <!-- Navbar -->
              @include('layout.backoffice.navbar')
         <!-- /.navbar -->
@@ -45,7 +47,7 @@
 
     @include('layout.backoffice.script')
     <script type="text/javascript">
-     
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -68,7 +70,21 @@
             icon: icon,
             title: message
             });
-        } 
+        }
+
+        function loading(){
+            Swal.fire({
+                title: '<h3>{{__("base.Un momento por favor!")}}</h3>',
+                html: '<p class="text-warning" >{{__("base.Procesando peticion")}}</p>',// add html attribute if you want or remove
+                allowOutsideClick: false,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                },
+            });
+        }
+
+
+
 
         function dropzone(numFiles){
             var uploadedDocumentMap = {}
@@ -107,10 +123,10 @@
                 @endif
             }
             }
-        } 
-        
+        }
+
         function clearDropzone(){
-            Dropzone.forElement("#document-dropzone").removeAllFiles(true);  
+            Dropzone.forElement("#document-dropzone").removeAllFiles(true);
             $('form').find('input[name="document[]"]').remove();
         }
     </script>

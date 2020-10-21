@@ -162,6 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */
@@ -175,7 +176,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         'anlutro\LaravelSettings\ServiceProvider',
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+        Laravolt\Avatar\ServiceProvider::class,
     ],
 
     /*
@@ -229,8 +231,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'U' => App\Helpers\utils::class,
         'Setting'   => 'anlutro\LaravelSettings\Facade',
-        
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Avatar'    => Laravolt\Avatar\Facade::class,
     ],
 
 ];

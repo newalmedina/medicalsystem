@@ -10,9 +10,16 @@ use Illuminate\Support\Facades\Auth;
 class Utils
 {
 
-    public static function example()
+    public static function configInformation()
     {
-        return 'example';
+        return  $setting = [
+            "hospital_name" => setting('hospital_name'),
+            "schedule" => setting('schedule'),
+            "email" => setting('email'),
+            "phone_number" => setting('phone_number'),
+            "direction" => setting('direction'),
+            "logo_photo" => setting('logo_photo'),
+        ];
     }
     public static function deleteTemporalFile(){
        if(Auth::user()){
