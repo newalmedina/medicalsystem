@@ -43,3 +43,6 @@
 <script src="https://malsup.github.io/jquery.blockUI.js"></script>
 <!-- Dropzone -->
 <script src="{{asset('plugins/dropzone/dropzone.js')}}"></script>
+
+<script src="{{asset('plugins/datatables/jquery.dataTables.js')}}"></script>
+<script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>

@@ -35,6 +35,8 @@ return [
     'Nueva especialidad' => 'Nueva especialidad',
     'Areas' => 'Áreas',
     'Especialidades' => 'Especialidades',
+    'Descripcion' => 'Descripción',
+    'Guardar' => 'Guardar',
     '' => '',
     '' => '',
 ];

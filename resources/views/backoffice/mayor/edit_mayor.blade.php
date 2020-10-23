@@ -1,9 +1,9 @@
 @push('modals')
 <div class="modal fade" id="add_mayor_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <form id="specialty_add_form" class="modal-content">
+      <form id="specialty_edit_form" class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel1">@lang('base.Nueva area')</h5>
+          <h5 class="modal-title" id="exampleModalLabel1">@lang('base.Editar area')</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success">@lang('base.Guardar')</button>
+          <button type="button" class="btn btn-success">@lang('base.Actualizar')</button>
         </div>
       </form >
     </div>

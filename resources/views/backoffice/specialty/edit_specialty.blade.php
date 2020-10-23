@@ -1,9 +1,9 @@
 @push('modals')
 <div class="modal fade" id="add_specialty_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <form id="mayor_add_form" class="modal-content">
+      <form id="mayor_edit_form" class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">@lang('base.Nueva especialidad')</h5>
+          <h5 class="modal-title" id="exampleModalLabel">@lang('base.Editar especialidad')</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success">@lang('base.Guardar')</button>
+          <button type="button" class="btn btn-success">@lang('base.Actualizar')</button>
         </div>
       </form >
     </div>
