@@ -31,6 +31,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'backoffice'], function () {
     Route::get('configuration-delete-resorce', 'ConfigurationController@deleteResource')->name('configuration.deleteResource');
     Route::post('configuration', 'ConfigurationController@store')->name('configuration.store');
     Route::post('temporal-files', 'TemporalFileController@storeMedia')->name('temporalFiles.storeMedia');
+
+    //Specialty
+    Route::get('specialtyArea', 'SpecialtyController@index')->name('specialtyArea');
 });
 
 Auth::routes();

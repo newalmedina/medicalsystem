@@ -34,6 +34,31 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-item  has-treeview {{!Route::is('speciality') ?: 'menu-open'}} {{!Route::is('worker') ?: 'menu-open'}}">
+            <a href="" class="nav-link  ">
+              <i class="nav-icon fas fa-user-md"></i>
+              <p>
+                @lang('base.Gestion de personal')
+              </p>
+            </a>
+            <ul class="ml-2 nav nav-treeview" style="font-size: 12px;">
+              <li class="nav-item">
+                <a href="{{route('specialtyArea')}}" class="nav-link {{!Route::is('speciality') ?: 'active'}}" >
+                  <i class="fas fa-list nav-icon"></i>
+                  <p>@lang('base.Especializaciones')</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('configuration')}}" class="nav-link {{!Route::is('worker') ?: 'active'}}">
+                  <i class="fas fa-user nav-icon"></i>
+                  <p>@lang('base.Personal')</p>
+                </a>
+              </li>
+
+            </ul>
+
+          </li>
           <li class="nav-item  has-treeview {{!Route::is('configuration') ?: 'menu-open'}}">
             <a href="" class="nav-link  ">
               <i class="nav-icon fas fa-cogs"></i>
@@ -41,7 +66,7 @@
                  @lang('base.Configuracion')
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="ml-2 nav nav-treeview" style="font-size: 12px;">
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="fas fa-user-cog nav-icon"></i>

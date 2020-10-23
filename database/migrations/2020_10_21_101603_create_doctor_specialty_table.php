@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDoctorMayorsTable extends Migration
+class CreateDoctorSpecialtyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDoctorMayorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('doctor_mayors', function (Blueprint $table) {
+        Schema::create('doctor_specialties', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')
@@ -21,10 +21,10 @@ class CreateDoctorMayorsTable extends Migration
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->bigInteger('mayor_id')->unsigned();
-            $table->foreign('mayor_id')
+            $table->bigInteger('specialty_id')->unsigned();
+            $table->foreign('specialty_id')
                 ->references('id')
-                ->on('mayors')
+                ->on('specialties')
                 ->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
@@ -38,6 +38,6 @@ class CreateDoctorMayorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('doctor_mayors');
+        Schema::dropIfExists('doctor_specialties');
     }
 }
