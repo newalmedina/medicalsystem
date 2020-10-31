@@ -44,13 +44,13 @@
             </a>
             <ul class="ml-2 nav nav-treeview" style="font-size: 12px;">
               <li class="nav-item">
-                <a href="{{route('specialtyArea')}}" class="nav-link {{!Route::is('speciality') ?: 'active'}}" >
+                <a href="{{route('specialty')}}" class="nav-link {{!Route::is('speciality') ?: 'active'}}" >
                   <i class="fas fa-list nav-icon"></i>
                   <p>@lang('base.Especializaciones')</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('configuration')}}" class="nav-link {{!Route::is('worker') ?: 'active'}}">
+                <a  href="{{route('personal')}}" class="nav-link {{!Route::is('worker') ?: 'active'}}">
                   <i class="fas fa-user nav-icon"></i>
                   <p>@lang('base.Personal')</p>
                 </a>

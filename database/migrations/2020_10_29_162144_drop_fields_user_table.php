@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMayorsTable extends Migration
+class DropFieldsUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateMayorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mayors', function (Blueprint $table) {
-            $table->id();
-            $table->string('description');
-            $table->softDeletes();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('is_secretary')->nullable($value = true)->default(0);
         });
     }
 
@@ -28,6 +25,7 @@ class CreateMayorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mayors');
+        Schema::table('users', function (Blueprint $table) {
+        });
     }
 }

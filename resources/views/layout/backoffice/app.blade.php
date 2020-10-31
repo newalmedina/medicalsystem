@@ -24,7 +24,6 @@
 
     <div class="wrapper">
         <div hidden>
-            {{U::deleteTemporalFile()}}
         </div>
         <!-- Navbar -->
              @include('layout.backoffice.navbar')
@@ -47,12 +46,15 @@
 
     @include('layout.backoffice.script')
     <script type="text/javascript">
-
+         $( document ).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
         function alertMessage(icon, message){
             const Toast = Swal.mixin({
             toast: true,
@@ -84,52 +86,44 @@
         }
 
 
-
-
-        function dropzone(numFiles){
-            var uploadedDocumentMap = {}
-            Dropzone.options.documentDropzone = {
-            url: '{{ route('temporalFiles.storeMedia') }}',
-            maxFilesize: 1, // MB
-            maxFiles: numFiles,
-            addRemoveLinks: true,
-            headers: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}"
-            },
-            success: function (file, response) {
-                $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
-                uploadedDocumentMap[file.name] = response.name
-            },
-            removedfile: function (file) {
-                file.previewElement.remove()
-                var name = ''
-                if (typeof file.file_name !== 'undefined') {
-                name = file.file_name
-                } else {
-                name = uploadedDocumentMap[file.name]
-                }
-                $('form').find('input[name="document[]"][value="' + name + '"]').remove()
-            },
-            init: function () {
-                @if(isset($project) && $project->document)
-                var files =
-                    {!! json_encode($project->document) !!}
-                for (var i in files) {
-                    var file = files[i]
-                    this.options.addedfile.call(this, file)
-                    file.previewElement.classList.add('dz-complete')
-                    $('form').append('<input type="hidden" name="document[]" value="' + file.file_name + '">')
-                }
-                @endif
-            }
-            }
+        function closeModal(modalid){
+            $('.modal-backdrop').remove();
+            $('#'+modalid).modal("toggle");
         }
 
-        function clearDropzone(){
-            Dropzone.forElement("#document-dropzone").removeAllFiles(true);
-            $('form').find('input[name="document[]"]').remove();
+        function capitalize(word) {
+            return word[0].toUpperCase() + word.slice(1);
         }
-    </script>
+        function dataTableEspañol(){
+            return idioma=
+            {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Registros",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Registros",
+                "infoFiltered": "",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Registros",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            }
+            ;
+        }
+
+        function ucfirst(string){
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+       </script>
     @stack('js')
 </body>
 </html>

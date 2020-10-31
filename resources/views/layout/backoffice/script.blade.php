@@ -44,5 +44,11 @@
 <!-- Dropzone -->
 <script src="{{asset('plugins/dropzone/dropzone.js')}}"></script>
 
-<script src="{{asset('plugins/datatables/jquery.dataTables.js')}}"></script>
-<script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
+<!-- DataTables -->
+<script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+
+<!-- Include SmartWizard JavaScript source -->
+<script src="{{asset('plugins/smartwizard/js/jquery.smartWizard.min.js')}}"></script>

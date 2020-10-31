@@ -47,21 +47,18 @@ class ConfigurationController extends Controller
         setting()->set('email', $request->email);
         setting()->set('phone_number', $request->phone_number);
         setting()->set('direction', $request->direction);
-        if ($request->document != "") {
-            if(setting('logo_photo')!=null){
-                if(file_exists(setting('logo_photo'))){
-                    unlink(setting('logo_photo'));
-                }
-            }
-            foreach ($request->document as $file) {
-                $newPhoto = 'config_photo/' .$file;
-                if (!copy("temporal_files/".$file, $newPhoto)) {
-                    echo "failed to copy";
-                }
-                else{
-                    setting()->set('logo_photo', $newPhoto);
-                }                
-            }            
+
+
+        if ($request->hasFile('file')) {
+            $this-> deleteResource();
+            $image = $request->file('file');
+            // $filename = round(microtime(true)) . $image->getClientOriginalName();
+            $extension = $image->getClientOriginalExtension();
+            $filename = round(microtime(true)) . '.' . $extension;
+            $image_course = Image::make($image->getRealPath());
+            $image_course->save(public_path('config_photo/' . $filename));
+            $file_name = "config_photo/" . $filename;
+            setting()->set('logo_photo',  $file_name);
         }
         setting()->save();
         return 1;
@@ -77,5 +74,5 @@ class ConfigurationController extends Controller
        $setting = setting('logo_photo');
         return view("backoffice.configuration.ajax_get_config_resource",compact("setting"));
     }
-  
+
 }

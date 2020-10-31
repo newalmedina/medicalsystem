@@ -21,13 +21,11 @@ class CreateUsersTable extends Migration
             $table->string('password');
 
             $table->string('identification', 15);
-            $table->text('identification_photo');
             $table->date('born_date');
             $table->string('phone_number', 10);
             $table->char('gender', 1)->nullable($value = true)->default("M");
             $table->text('direction')->nullable($value = true);
             $table->boolean('is_admin')->nullable($value = true)->default(0);
-            $table->boolean('is_nursey')->nullable($value = true)->default(0);
             $table->boolean('is_doctor')->nullable($value = true)->default(0);
             $table->boolean('active');
             $table->timestamp('email_verified_at')->nullable();

@@ -32,8 +32,26 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'backoffice'], function () {
     Route::post('configuration', 'ConfigurationController@store')->name('configuration.store');
     Route::post('temporal-files', 'TemporalFileController@storeMedia')->name('temporalFiles.storeMedia');
 
+    //personal
+    Route::post('personal', 'UserController@store')->name('personal.store');
+    Route::get('personal', 'UserController@index')->name('personal');
+    Route::get('get-personal-admin', 'UserController@getAdmins')->name('personal.getAdmins');
+    Route::get('get-personal-secretary', 'UserController@getSecretaries')->name('personal.getSecretaries');
+    Route::get('get-personal-doctor', 'UserController@getDoctors')->name('personal.getDoctors');
+    Route::get('get-personal-admin', 'UserController@getAdmins')->name('personal.getAdmins');
+    Route::get('personal-delete/{id}', 'UserController@destroy')->name('personal.destroy');
+    Route::get('personal-show/{id}', 'UserController@show')->name('personal.show');
+    Route::post('personal-update/{id}', 'UserController@update')->name('personal.update');
+
     //Specialty
-    Route::get('specialtyArea', 'SpecialtyController@index')->name('specialtyArea');
+    Route::post('specialty', 'SpecialtyController@store')->name('specialty.store');
+    Route::get('specialty', 'SpecialtyController@index')->name('specialty');
+    Route::get('get-specialty', 'SpecialtyController@getSpecialties')->name('specialty.getSpecialties');
+    Route::get('specialty-delete/{id}', 'SpecialtyController@destroy')->name('specialty.destroy');
+    Route::get('specialty-show/{id}', 'SpecialtyController@show')->name('specialty.show');
+    Route::post('specialty-update/{id}', 'SpecialtyController@update')->name('specialty.update');
+
+
 });
 
 Auth::routes();

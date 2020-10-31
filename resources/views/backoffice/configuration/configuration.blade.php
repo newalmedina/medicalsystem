@@ -64,12 +64,9 @@
                   <div id="direction_error" class="text-danger font-italic"></div>
                 </div>
 
-                <div class="form-group col-12 ">
-                  <label for="document">Documents</label>
-                  <div class="" id="dropzone_container">
-                    <div class="needsclick dropzone" id="document-dropzone">
-                    </div>
-                  </div>
+                <div class="form-group col-2 ">
+                  <label for="document">@lang('base.logo')</label><br>
+                  <input   type="file" id="file" name="file">
                 </div>
                 <div class="form-group  col-12 text-center"  id="resource">
 
@@ -78,14 +75,8 @@
                   <input class="btn btn-success" type="submit">
               </div>
             </form>
-
-
-
             </div>
-
         </div>
-
-
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
@@ -95,9 +86,8 @@
 <script>
   $( document ).ready(function() {
     getConfigResource();
-
   });
-  dropzone(1);
+
    $('#form_configuration').submit(function(e) {
         e.preventDefault();
 
@@ -124,7 +114,7 @@
             success: function(data) {
               alertMessage('success',' Operacion realizada correctamente');
               getConfigResource();
-              clearDropzone();
+              $("#file").val("");
             },
              error: function (response) {
               if (response.status == 422) { // when status code is 422, it's a validation issue
@@ -145,31 +135,45 @@
         });
 
     });
-    $(document).on('click', '#delete_resource', function (e) {
-            e.preventDefault();
+    $(document).on('click', '#delete_resource', function(e){
+        e.preventDefault();
 
-            Swal.fire({
-                title: "{{ __('base.¿Estás segur@?') }}",
-                text: "{{ __('base.Esta acción no se puede deshacer') }}",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "{{ __('base.Sí, borrar') }}",
-                cancelButtonText: "{{ __('base.Cancelar') }}",
-            }).then(function (result) {
-                if (result.value) {
-                    $.get('{{ url('backoffice/configuration-delete-resorce/') }}', function (data) {
-                      getConfigResource();
-                    });
-                    alertMessage('success',' Operacion realizada correctamente');
-                }
-            });
+        Swal.fire({
+            title: "{{ __('base.¿Estás segur@?') }}",
+            text: "{{ __('base.Esta acción no se puede deshacer') }}",
+        icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "{{ __('base.Sí, borrar') }}",
+            cancelButtonText: "{{ __('base.Cancelar') }}",
+        }).then(function(result) {
+            if (result.value) {
+                $.ajax({
+                    type: "get",
+                    url: '{{ url('backoffice/configuration-delete-resorce/') }}',
+                    beforeSend: function() {
+                        loading();
+                    },
+                    success: function(data) {
+                        alertMessage('success',' Operacion realizada correctamente');
+                        getConfigResource();
+                    },
+                    error: function (response) {
+                        alertMessage('error',' No se ha podido procesar la operacion contacte con el programador');
+                    },
+                    complete: function() {
+                    }
+                });
+            }
         });
+    });
 
     function getConfigResource(){
       $.get('{{ route('configuration.getConfigResource') }}', function (data) {
           $("#resource").html(data);
       });
     }
+
+
 </script>
 
 @endpush

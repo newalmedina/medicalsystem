@@ -21,16 +21,5 @@ class Utils
             "logo_photo" => setting('logo_photo'),
         ];
     }
-    public static function deleteTemporalFile(){
-       if(Auth::user()){
-        $temporalFiles= Temporal_File::where("user_id",Auth::user()->id)->get();
-        foreach ($temporalFiles as $file) {
-            if(file_exists("temporal_files/".$file->file_directory)){
-                unlink("temporal_files/".$file->file_directory);
-            }
-        }
-        return Temporal_File::where("user_id",Auth::user()->id)->delete();
-       }
 
-    }
 }

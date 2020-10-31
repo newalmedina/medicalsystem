@@ -22,5 +22,8 @@
  <link rel="stylesheet" href="{{asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
  <!-- Toastr -->
  <link rel="stylesheet" href="{{asset('plugins/toastr/toastr.min.css')}}">
- <link rel="stylesheet" href="{{asset('plugins/dropzone/dropzone.css')}}">
- <link rel="stylesheet" href="{{asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
+   <!-- DataTables -->
+   <link rel="stylesheet" href="{{asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+  <link rel="stylesheet" href="{{asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+ <!-- smartWizard -->
+ <link rel="stylesheet" href="{{asset('plugins/smartwizard/css/smart_wizard_all.css')}}">
