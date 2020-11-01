@@ -1,5 +1,5 @@
 
-<div class="modal fade" id="add_personal_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="add_personal_modal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <form id="specialty_add_form" class="modal-content">
         <div class="modal-header">
@@ -58,31 +58,26 @@
             --}}
             <!-- SmartWizard html -->
             <div id="smartwizard" style="width: 100%">
-
                 <ul class="nav">
-                    <li class="nav-item">
-                    <a class="nav-link" href="#step-1">
-                        <strong>Step 1</strong> <br>This is step description
-                    </a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#step-2">
-                        <strong>Step 2</strong> <br>This is step description
-                    </a>
-                    </li>
-
+                   <li>
+                       <a class="nav-link" href="#step-1">
+                          @lang('base.Otros datos')
+                       </a>
+                   </li>
+                   <li>
+                       <a class="nav-link" href="#step-2">
+                          @lang('base.especialidades')
+                       </a>
+                   </li>
                 </ul>
 
                 <div class="tab-content">
-                    <div id="step-1" class="tab-pane " role="tabpanel" aria-labelledby="step-1">
-                        <h3>Step 1 Content</h3>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                    </div>
-                    <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
-                        <h3>Step 2 Content</h3>
-                        <div>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </div>
-                    </div>
-
+                   <div id="step-1" class="tab-pane" role="tabpanel">
+                      Step content
+                   </div>
+                   <div id="step-2" class="tab-pane" role="tabpanel">
+                      Step content
+                   </div>
                 </div>
             </div>
 
@@ -96,25 +91,37 @@
   @push('js')
 <script>
  $( document ).ready(function() {
-
-
-
-            // Smart Wizard
-            $('#smartwizard').smartWizard({
-                selected: 0,
-                theme: 'arrows', // default, arrows, dots, progress
-                // darkMode: true,
-                transition: {
-                    animation: 'slide-horizontal', // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
-                },
-                toolbarSettings: {
-                    toolbarPosition: 'both', // both bottom
-                    toolbarExtraButtons: [btnFinish, btnCancel]
-                }
-            });
+    // Smart Wizard
+    $('#smartwizard').smartWizard({
+        selected: 0,
+        theme: 'arrows', // default, arrows, dots, progress
+        // darkMode: true,
+        keyNavigation: false, // Enable/Disable key navigation(left and right keys are used if enabled)
+        enableAllSteps: true,  // Enable/Disable all steps on first load
+        transitionEffect: 'fade',
+        anchorSettings: {
+            anchorClickable: true, // Enable/Disable anchor navigation
+            enableAllAnchors: true, // Activates all anchors clickable all times
+            markDoneStep: true, // add done css
+            enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
+        },
+        lang: {
+            next: 'Siguiente',
+            previous: 'Anterior'
+        }
+    });
 
 
 });
+$("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection, stepPosition) {
+
+      $("#specialty_add_form button[type=submit]").addClass('d-none');
+
+      if(stepPosition === 'last') {
+        $("#specialty_add_form button[type=submit]").removeClass('d-none');
+      }
+  });
+
 $('#specialty_add_form').submit(function(e) {
     e.preventDefault();
     var formData = new FormData(this);

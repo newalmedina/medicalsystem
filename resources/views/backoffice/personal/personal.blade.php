@@ -172,19 +172,6 @@
         getDoctors();
         getSecretaries();
         getAdmins();
-         // Smart Wizard
-     $('#smartwizard').smartWizard({
-                selected: 0,
-                theme: 'dots', // default, arrows, dots, progress
-                // darkMode: true,
-                transition: {
-                    animation: 'slide-horizontal', // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
-                },
-                toolbarSettings: {
-                    toolbarPosition: 'both' // both bottom
-                    //toolbarExtraButtons: [btnFinish, btnCancel]
-                }
-            });
     });
 
 
